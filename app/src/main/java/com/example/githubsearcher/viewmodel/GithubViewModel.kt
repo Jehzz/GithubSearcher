@@ -13,7 +13,7 @@ import retrofit2.Response
 
 class GithubViewModel : ViewModel() {
 
-    val baseApiUrl: String = "https://api.github.com/search"
+    val baseApiUrl: String = "https://api.github.com/search/"
 
     //Declarations and getters for Poko datasets
     private val searchResults = MutableLiveData<PokoGithubSearchResults>()

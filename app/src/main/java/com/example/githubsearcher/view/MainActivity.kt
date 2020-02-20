@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher.R
 import com.example.githubsearcher.model.PokoGithubSearchResults
 import com.example.githubsearcher.viewmodel.GithubViewModel
@@ -31,9 +31,8 @@ class MainActivity : AppCompatActivity() {
         //Observe the search results dataset and pass to recyclerview
         githubViewModel.getSearchResults()
             .observe(this, Observer<PokoGithubSearchResults> { t ->
-                rv_search_results.layoutManager = GridLayoutManager(
-                    this@MainActivity,
-                    4
+                rv_search_results.layoutManager = LinearLayoutManager(
+                    this@MainActivity
                 )
                 rv_search_results.adapter = CustomAdapter(t!!)
             }

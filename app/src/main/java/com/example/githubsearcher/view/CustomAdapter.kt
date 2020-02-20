@@ -30,7 +30,7 @@ class CustomAdapter(val dataSet: PokoGithubSearchResults) :
      * Returns the number of returned items from the dataset
      * @author: Jess Osborn
      */
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = dataSet.total_count
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.onBind(dataSet, position)
