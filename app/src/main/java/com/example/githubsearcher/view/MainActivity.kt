@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher.R
 import com.example.githubsearcher.model.PokoGithubSearchResults
 import com.example.githubsearcher.viewmodel.GithubViewModel
-import com.example.weatherapp.view.CustomAdapter
+import com.example.weatherapp.view.SearchListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.Thread.sleep
 
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     this@MainActivity
                 )
                 t?.let {
-                    rv_search_results.adapter = CustomAdapter(it)
+                    rv_search_results.adapter = SearchListAdapter(it)
                 }
             }
             )

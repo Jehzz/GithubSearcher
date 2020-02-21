@@ -35,8 +35,7 @@ class GithubViewModel : ViewModel() {
     }
 
 
-    //Get info from network calls
-
+    //Get search results from retrofit
     fun getGithubSearchResults(user: String) {
 
         val network = Network(baseApiUrl)
@@ -57,7 +56,25 @@ class GithubViewModel : ViewModel() {
             })
     }
 
+    //Get user info from retrofit
+    fun getUserInfo(user: String) {
 
+        val network = Network(baseApiUrl)
+        network.initRetrofit().getUserInfo(user)
+            .enqueue(object : Callback<PokoGithubUser> {
+                override fun onResponse(
+                    call: Call<PokoGithubUser>,
+                    response: Response<PokoGithubUser>
+                ) {
+                    println("success")
+                    githubUser.value = response.body()
+                }
 
-
+                override fun onFailure(call: Call<PokoGithubUser>, t: Throwable) {
+                    println("failure")
+                    t.printStackTrace()
+                }
+            })
+    }
+    //todo: getReposList
 }

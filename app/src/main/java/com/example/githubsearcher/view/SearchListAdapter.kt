@@ -12,11 +12,11 @@ import com.example.githubsearcher.model.PokoGithubSearchResults
 import com.squareup.picasso.Picasso
 
 /**
- * Class specific for returning only the next 24 hours of weather data to a recyclerview
+ * Adapter class for mainactivity's search results recyclerview
  * @author: Jess Osborn
  */
-class CustomAdapter(val dataSet: PokoGithubSearchResults) :
-    RecyclerView.Adapter<CustomAdapter.CustomViewHolder>() {
+class SearchListAdapter(val dataSet: PokoGithubSearchResults) :
+    RecyclerView.Adapter<SearchListAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder =
         CustomViewHolder(
@@ -29,7 +29,7 @@ class CustomAdapter(val dataSet: PokoGithubSearchResults) :
         )
 
     /**
-     * Returns the number of returned items from the dataset
+     * Returns the number of items currently in the dataset
      * @author: Jess Osborn
      */
     override fun getItemCount(): Int = dataSet.total_count
