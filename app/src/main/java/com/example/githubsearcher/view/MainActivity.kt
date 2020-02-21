@@ -1,6 +1,8 @@
 package com.example.githubsearcher.view
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -11,8 +13,10 @@ import com.example.githubsearcher.model.PokoGithubSearchResults
 import com.example.githubsearcher.viewmodel.GithubViewModel
 import com.example.weatherapp.view.CustomAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.Thread.sleep
 
 class MainActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +29,23 @@ class MainActivity : AppCompatActivity() {
             }
         }).get(GithubViewModel::class.java)
 
-        //Fetch the data based on typed input. Test mine for now
-        githubViewModel.getGithubSearchResults("Jehzz")
+        //set listener on edit text
+        et_username_search.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                sleep(200)
+                githubViewModel.getGithubSearchResults(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //todo
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //todo
+
+            }
+        })
+
 
         //Observe the search results dataset and pass to recyclerview
         githubViewModel.getSearchResults()
@@ -34,7 +53,9 @@ class MainActivity : AppCompatActivity() {
                 rv_search_results.layoutManager = LinearLayoutManager(
                     this@MainActivity
                 )
-                rv_search_results.adapter = CustomAdapter(t!!)
+                t?.let {
+                    rv_search_results.adapter = CustomAdapter(it)
+                }
             }
             )
 

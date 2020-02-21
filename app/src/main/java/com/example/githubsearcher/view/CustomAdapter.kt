@@ -4,10 +4,12 @@ package com.example.weatherapp.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.githubsearcher.R
 import com.example.githubsearcher.model.PokoGithubSearchResults
+import com.squareup.picasso.Picasso
 
 /**
  * Class specific for returning only the next 24 hours of weather data to a recyclerview
@@ -42,9 +44,11 @@ class CustomAdapter(val dataSet: PokoGithubSearchResults) :
      */
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView = itemView.findViewById(R.id.tv_user_name)
+        var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_user_avatar)
 
         fun onBind(data: PokoGithubSearchResults, position: Int) {
-            tvName.text = data.items[0].login
+            tvName.text = data.items[position].login
+            Picasso.get().load(data.items[position].avatar_url).resize(100, 100).into(ivUserAvatar)
         }
     }
 }

@@ -47,7 +47,6 @@ class GithubViewModel : ViewModel() {
                     response: Response<PokoGithubSearchResults>
                 ) {
                     println("success")
-                    println(response.body().toString())
                     searchResults.value = response.body()
                 }
 
