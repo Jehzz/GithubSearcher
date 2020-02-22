@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher.R
 import com.example.githubsearcher.model.PokoGithubSearchResults
-import com.example.githubsearcher.model.UserViewActivity
 import com.example.githubsearcher.viewmodel.GithubViewModel
 import com.example.weatherapp.view.SearchListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         //set listener on edit text
         et_username_search.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                sleep(200)
+                sleep(100)
                 githubViewModel.getGithubSearchResults(s.toString())
             }
 
@@ -63,9 +62,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     //executed when recyclerview item is clicked. returns a user info api url, launches next activity
-    private fun itemClicked(userUrl: String) {
+    private fun itemClicked(userName: String) {
         val intent = Intent(this, UserViewActivity::class.java).apply{
-            putExtra("user", userUrl)
+            putExtra("user", userName)
         }
         startActivity(intent)
     }

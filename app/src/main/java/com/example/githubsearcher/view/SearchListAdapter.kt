@@ -45,14 +45,14 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener:
      */
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView = itemView.findViewById(R.id.tv_user_name)
-        var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_user_avatar)
-        var userUrl: String = ""
+        var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_profile_avatar)
+        var userName: String = ""
 
         fun onBind(data: PokoGithubSearchResults, position: Int, clickListener: (String) -> Unit) {
             tvName.text = data.items[position].login
             Picasso.get().load(data.items[position].avatar_url).resize(100, 100).into(ivUserAvatar)
-            userUrl = data.items[position].url
-            itemView.setOnClickListener { clickListener(userUrl)}
+            userName = data.items[position].login
+            itemView.setOnClickListener { clickListener(userName)}
         }
     }
 }
