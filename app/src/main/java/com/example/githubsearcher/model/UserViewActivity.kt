@@ -25,7 +25,7 @@ class UserViewActivity : AppCompatActivity() {
         //Fetch data via API todo: get User: String from intent
         githubViewModel.getUserInfo("Jehzz")
 
-        //Observe data, assign to views
+        //Observe data, assign to viewsc
         githubViewModel.getGithubUser()
             .observe(this, Observer<PokoGithubUser> {
                 tv_username.text = it.login.toString()
