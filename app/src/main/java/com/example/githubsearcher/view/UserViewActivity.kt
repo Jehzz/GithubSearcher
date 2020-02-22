@@ -1,11 +1,14 @@
 package com.example.githubsearcher.view
 
+import ReposListAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher.R
+import com.example.githubsearcher.model.PokoGithubReposList
 import com.example.githubsearcher.model.PokoGithubUser
 import com.example.githubsearcher.viewmodel.GithubViewModel
 import com.squareup.picasso.Picasso
@@ -35,15 +38,31 @@ class UserViewActivity : AppCompatActivity() {
         githubViewModel.getGithubUser()
             .observe(this, Observer<PokoGithubUser> {
                 tv_username.text = it.login?.toString()
-                tv_email.text = it.email?.toString()
-                tv_location.text = it.location?.toString()
-                tv_join_date.text = it.created_at?.toString()
-                tv_follower_count.text = it.followers?.toString()
-                tv_following_count.text = it.following?.toString()
+                tv_email.text = "Email: " +it.email?.toString()
+                tv_location.text = "Location: " +it.location?.toString()
+                tv_join_date.text = "Joined: " +it.created_at?.toString()
+                tv_follower_count.text = "Followers: " +it.followers?.toString()
+                tv_following_count.text = "Following: " +it.following?.toString()
                 Picasso.get().load(it.avatar_url?.toString()).resize(100, 100).into(iv_user_avatar)
-                //todo: get user bio.
+                tv_user_bio.text = it.bio?.toString()
             })
 
-        //todo: initiate 3rd retrofit api call with user's repolist url
+        githubViewModel.getUserRepos(userName)
+
+        println("time to OBSERVE")
+
+        githubViewModel.getGithubRepos()
+            .observe(this, Observer<List<PokoGithubReposList>> { t ->
+            rv_user_repos.layoutManager = LinearLayoutManager(
+                this@UserViewActivity
+            )
+            t?.let {
+                rv_user_repos.adapter = ReposListAdapter(it, { userUrl: String -> itemClicked(userUrl) })
+            }
+        })
+    }
+    //executed when recyclerview item is clicked
+    private fun itemClicked(userName: String) {
+        //todo: onclick behavior
     }
 }
