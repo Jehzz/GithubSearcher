@@ -44,6 +44,6 @@ class UserViewActivity : AppCompatActivity() {
                 tv_user_bio.text = it.bio?.toString()
             })
 
-        //todo: initiate 3rd retrofit api call with user's repolist url
+        githubViewModel.getUserRepos(userName)
     }
 }

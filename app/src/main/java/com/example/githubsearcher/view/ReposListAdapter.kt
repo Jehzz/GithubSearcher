@@ -27,7 +27,7 @@ class ReposListAdapter(val dataSet: PokoGithubReposList, val clickListener: (Str
      * Returns the number of items currently in the dataset
      * @author: Jess Osborn
      */
-    override fun getItemCount(): Int = dataSet.size
+    override fun getItemCount(): Int = dataSet.reposList.size
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.onBind(dataSet, position, clickListener)
@@ -42,7 +42,7 @@ class ReposListAdapter(val dataSet: PokoGithubReposList, val clickListener: (Str
         var tvRepoName: TextView = itemView.findViewById(R.id.tv_repo_name)
 
         fun onBind(data: PokoGithubReposList, position: Int, clickListener: (String) -> Unit) {
-            tvRepoName.text = data.name.toString()
+            tvRepoName.text = data.reposList[position].toString()
         }
     }
 }

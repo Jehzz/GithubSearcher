@@ -1,6 +1,11 @@
 package com.example.githubsearcher.model
 
 data class PokoGithubReposList(
+
+    val reposList: List<Repos>
+)
+
+data class Repos(
     val archive_url: String,
     val archived: Boolean,
     val assignees_url: String,

@@ -81,4 +81,26 @@ class GithubViewModel : ViewModel() {
             })
     }
     //todo: getReposList
+    //Get user info from retrofit
+    fun getUserRepos(user: String) {
+
+        val network = Network(baseApiUrl)
+        network.initRetrofit().getRepos(user)
+            .enqueue(object : Callback<PokoGithubReposList> {
+                override fun onResponse(
+                    call: Call<PokoGithubReposList>,
+                    response: Response<PokoGithubReposList>
+                ) {
+                    println("success")
+                    println("response info = " +response.body())
+                    githubRepos.value = response?.body()
+
+                }
+
+                override fun onFailure(call: Call<PokoGithubReposList>, t: Throwable) {
+                    println("failure")
+                    t.printStackTrace()
+                }
+            })
+    }
 }
