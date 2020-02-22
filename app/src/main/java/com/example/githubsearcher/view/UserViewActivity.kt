@@ -33,7 +33,7 @@ class UserViewActivity : AppCompatActivity() {
         }).get(GithubViewModel::class.java)
 
 
-        //Fetch data via API. Compiler insists ? is not necessary, but it avoids a null ptr
+        //Fetch github user data via API. Compiler insists ? is not necessary, but it avoids a null ptr
         githubViewModel.getUserInfo(userName)
 
         //Observe data, assign to views
@@ -49,10 +49,11 @@ class UserViewActivity : AppCompatActivity() {
                 tv_user_bio.text = it.bio?.toString()
             })
 
+
+        //Fetch github user repository data via API
         githubViewModel.getUserRepos(userName)
 
-        println("time to OBSERVE")
-
+        //Observe repository data, pass to recyclerview
         githubViewModel.getGithubRepos()
             .observe(this, Observer<List<PokoGithubReposList>> { t ->
             rv_user_repos.layoutManager = LinearLayoutManager(
@@ -63,7 +64,8 @@ class UserViewActivity : AppCompatActivity() {
             }
         })
     }
-    //executed when recyclerview item is clicked
+
+    //Executed when recyclerview item is clicked. opens repo url in web browser
     private fun itemClicked(repoUrl: String) {
         intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(repoUrl)

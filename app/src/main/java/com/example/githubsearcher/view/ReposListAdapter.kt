@@ -33,7 +33,6 @@ class ReposListAdapter(val dataSet: List<PokoGithubReposList>, val clickListener
         holder.onBind(dataSet, position, clickListener)
     }
 
-
     /**
      * Binds data from the dataset to repos_item_view layout.
      * @author: Jess Osborn

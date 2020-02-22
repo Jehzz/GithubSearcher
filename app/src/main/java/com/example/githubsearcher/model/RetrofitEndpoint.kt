@@ -10,7 +10,7 @@ import retrofit2.http.Query
  */
 interface RetrofitEndpoint {
 
-    //Returns list of github users whos name matches the input
+    //Returns list of github users that match the searched name
     //Example: https://api.github.com/search/users?q=square
     @GET("users")
     fun getSearchResults(
@@ -18,7 +18,7 @@ interface RetrofitEndpoint {
     ): Call<PokoGithubSearchResults>
 
 
-    //Returns JSON response with information on the specified user
+    //Returns information on the specified user
     //Example: https://api.github.com/users/square
     @GET("users/{username}")
     fun getUserInfo(
