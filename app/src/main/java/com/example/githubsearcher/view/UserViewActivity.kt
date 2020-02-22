@@ -1,11 +1,13 @@
-package com.example.githubsearcher.model
+package com.example.githubsearcher.view
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.githubsearcher.R
+import com.example.githubsearcher.model.PokoGithubUser
 import com.example.githubsearcher.viewmodel.GithubViewModel
 import kotlinx.android.synthetic.main.activity_user_view.*
 
@@ -22,8 +24,15 @@ class UserViewActivity : AppCompatActivity() {
             }
         }).get(GithubViewModel::class.java)
 
-        //Fetch data via API todo: get User: String from intent
-        githubViewModel.getUserInfo("Jehzz")
+
+
+
+        //Fetch data via API todo: get User: String from intent\
+        //githubViewModel.getUserInfo("Jehzz")
+
+        var userName = intent.getStringExtra("user")
+        Toast.makeText(this, userName,Toast.LENGTH_LONG).show()
+        githubViewModel.getUserInfo(userName)
 
         //Observe data, assign to views
         githubViewModel.getGithubUser()
