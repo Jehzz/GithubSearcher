@@ -14,6 +14,7 @@ import retrofit2.Response
 class GithubViewModel : ViewModel() {
 
     val baseApiUrl: String = "https://api.github.com/search/"
+    val userBaseUrl: String = "https://api.github.com/"
 
     //Declarations and getters for Poko datasets
     private val searchResults = MutableLiveData<PokoGithubSearchResults>()
@@ -59,7 +60,7 @@ class GithubViewModel : ViewModel() {
     //Get user info from retrofit
     fun getUserInfo(user: String) {
 
-        val network = Network(baseApiUrl)
+        val network = Network(userBaseUrl)
         network.initRetrofit().getUserInfo(user)
             .enqueue(object : Callback<PokoGithubUser> {
                 override fun onResponse(
@@ -67,7 +68,9 @@ class GithubViewModel : ViewModel() {
                     response: Response<PokoGithubUser>
                 ) {
                     println("success")
+                    println("response info = " +response.body())
                     githubUser.value = response.body()
+
                 }
 
                 override fun onFailure(call: Call<PokoGithubUser>, t: Throwable) {

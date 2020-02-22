@@ -11,8 +11,6 @@ import kotlinx.android.synthetic.main.activity_user_view.*
 
 class UserViewActivity : AppCompatActivity() {
 
-    var userData: PokoGithubUser? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_view)
@@ -31,11 +29,11 @@ class UserViewActivity : AppCompatActivity() {
         githubViewModel.getGithubUser()
             .observe(this, Observer<PokoGithubUser> {
                 tv_username.text = it.login.toString()
-                tv_email.text = it.email.toString()
-                tv_location.text = it.location.toString()
-                tv_join_date.text = it.created_at.toString()
-                tv_follower_count.text = it.followers.toString()
-                tv_following_count.text = it.following.toString()
+                //tv_email.text = it.email.toString()
+                //tv_location.text = it.location.toString()
+                //tv_join_date.text = it.created_at.toString()
+                //tv_follower_count.text = it.followers.toString()
+                //tv_following_count.text = it.following.toString()
                 //tv_bio....
             })
 

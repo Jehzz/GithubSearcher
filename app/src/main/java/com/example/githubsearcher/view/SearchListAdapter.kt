@@ -15,8 +15,8 @@ import com.squareup.picasso.Picasso
  * Adapter class for mainactivity's search results recyclerview
  * @author: Jess Osborn
  */
-class SearchListAdapter(val dataSet: PokoGithubSearchResults) :
-    RecyclerView.Adapter<SearchListAdapter.CustomViewHolder>() {
+class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener: (String) -> Unit) :
+    RecyclerView.Adapter<SearchListAdapter.CustomViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder =
         CustomViewHolder(
@@ -35,8 +35,9 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults) :
     override fun getItemCount(): Int = dataSet.total_count
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.onBind(dataSet, position)
+        holder.onBind(dataSet, position, clickListener)
     }
+
 
     /**
      * Binds data from the dataset to search_item_layout views.
@@ -45,10 +46,13 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults) :
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView = itemView.findViewById(R.id.tv_user_name)
         var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_user_avatar)
+        var userUrl: String = ""
 
-        fun onBind(data: PokoGithubSearchResults, position: Int) {
+        fun onBind(data: PokoGithubSearchResults, position: Int, clickListener: (String) -> Unit) {
             tvName.text = data.items[position].login
             Picasso.get().load(data.items[position].avatar_url).resize(100, 100).into(ivUserAvatar)
+            userUrl = data.items[position].url
+            itemView.setOnClickListener { clickListener(userUrl)}
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.githubsearcher.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher.R
 import com.example.githubsearcher.model.PokoGithubSearchResults
+import com.example.githubsearcher.model.UserViewActivity
 import com.example.githubsearcher.viewmodel.GithubViewModel
 import com.example.weatherapp.view.SearchListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,10 +56,18 @@ class MainActivity : AppCompatActivity() {
                     this@MainActivity
                 )
                 t?.let {
-                    rv_search_results.adapter = SearchListAdapter(it)
+                    rv_search_results.adapter = SearchListAdapter(it, { userUrl: String -> itemClicked(userUrl) })
                 }
             }
             )
-
     }
+
+    //executed when recyclerview item is clicked. returns a user info api url, launches next activity
+    private fun itemClicked(userUrl: String) {
+        val intent = Intent(this, UserViewActivity::class.java).apply{
+            putExtra("user", userUrl)
+        }
+        startActivity(intent)
+    }
+
 }
