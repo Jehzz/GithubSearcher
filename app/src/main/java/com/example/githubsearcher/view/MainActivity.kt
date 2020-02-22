@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             )
     }
 
-    //executed when recyclerview item is clicked. returns a user info api url, launches next activity
+    //executed when recyclerview item is clicked. returns a user's login field, launches next activity
     private fun itemClicked(userName: String) {
         val intent = Intent(this, UserViewActivity::class.java).apply{
             putExtra("user", userName)

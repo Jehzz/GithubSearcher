@@ -35,13 +35,13 @@ class UserViewActivity : AppCompatActivity() {
         githubViewModel.getGithubUser()
             .observe(this, Observer<PokoGithubUser> {
                 tv_username.text = it.login?.toString()
-                tv_email.text = it.email?.toString()
-                tv_location.text = it.location?.toString()
-                tv_join_date.text = it.created_at?.toString()
-                tv_follower_count.text = it.followers?.toString()
-                tv_following_count.text = it.following?.toString()
+                tv_email.text = "Email: " +it.email?.toString()
+                tv_location.text = "Location: " +it.location?.toString()
+                tv_join_date.text = "Joined: " +it.created_at?.toString()
+                tv_follower_count.text = "Followers: " +it.followers?.toString()
+                tv_following_count.text = "Following: " +it.following?.toString()
                 Picasso.get().load(it.avatar_url?.toString()).resize(100, 100).into(iv_user_avatar)
-                //todo: get user bio.
+                tv_user_bio.text = it.bio?.toString()
             })
 
         //todo: initiate 3rd retrofit api call with user's repolist url
