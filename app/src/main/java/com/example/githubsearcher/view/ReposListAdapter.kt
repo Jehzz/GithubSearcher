@@ -35,7 +35,7 @@ class ReposListAdapter(val dataSet: List<PokoGithubReposList>, val clickListener
 
 
     /**
-     * Binds data from the dataset to item_layout views.
+     * Binds data from the dataset to repos_item_view layout.
      * @author: Jess Osborn
      */
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,8 +44,13 @@ class ReposListAdapter(val dataSet: List<PokoGithubReposList>, val clickListener
         var tvStars: TextView = itemView.findViewById(R.id.tv_stars)
 
         fun onBind(data: List<PokoGithubReposList>, position: Int, clickListener: (String) -> Unit) {
+            //assign text fields
             tvRepoName.text = data[position].name.toString()
-            //tvForks.text = data[position]
+            tvForks.text = "Forks: " +data[position].forks.toString()
+            tvStars.text = "Stars: " +data[position].stargazers_count
+
+            //get repo url for click listener
+            itemView.setOnClickListener{ clickListener(data[position].url)}
 
         }
     }

@@ -57,12 +57,12 @@ class UserViewActivity : AppCompatActivity() {
                 this@UserViewActivity
             )
             t?.let {
-                rv_user_repos.adapter = ReposListAdapter(it, { userUrl: String -> itemClicked(userUrl) })
+                rv_user_repos.adapter = ReposListAdapter(it, { repoUrl: String -> itemClicked(repoUrl) })
             }
         })
     }
     //executed when recyclerview item is clicked
-    private fun itemClicked(userName: String) {
+    private fun itemClicked(repoUrl: String) {
         //todo: onclick behavior
     }
 }
