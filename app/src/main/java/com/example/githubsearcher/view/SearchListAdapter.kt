@@ -45,7 +45,7 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener:
      */
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView = itemView.findViewById(R.id.tv_user_name)
-        var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_user_avatar)
+        var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_profile_avatar)
         var userName: String = ""
 
         fun onBind(data: PokoGithubSearchResults, position: Int, clickListener: (String) -> Unit) {

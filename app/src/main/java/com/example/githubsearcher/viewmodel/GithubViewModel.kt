@@ -69,7 +69,8 @@ class GithubViewModel : ViewModel() {
                 ) {
                     println("success")
                     println("response info = " +response.body())
-                    githubUser.value = response.body()
+                    githubUser.value = response?.body()
+                    println("Dataset info = " +getGithubUser().toString())
 
                 }
 
