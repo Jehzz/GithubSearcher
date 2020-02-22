@@ -30,5 +30,5 @@ interface RetrofitEndpoint {
     @GET("/users/{username}/repos")
     fun getRepos(
         @Path("username") user:String
-    ): Call<PokoGithubReposList>
+    ): Call<List<PokoGithubReposList>>
 }

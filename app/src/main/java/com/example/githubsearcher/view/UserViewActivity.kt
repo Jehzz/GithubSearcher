@@ -1,11 +1,14 @@
 package com.example.githubsearcher.view
 
+import ReposListAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubsearcher.R
+import com.example.githubsearcher.model.PokoGithubReposList
 import com.example.githubsearcher.model.PokoGithubUser
 import com.example.githubsearcher.viewmodel.GithubViewModel
 import com.squareup.picasso.Picasso
@@ -45,5 +48,21 @@ class UserViewActivity : AppCompatActivity() {
             })
 
         githubViewModel.getUserRepos(userName)
+
+        println("time to OBSERVE")
+
+        githubViewModel.getGithubRepos()
+            .observe(this, Observer<List<PokoGithubReposList>> { t ->
+            rv_user_repos.layoutManager = LinearLayoutManager(
+                this@UserViewActivity
+            )
+            t?.let {
+                rv_user_repos.adapter = ReposListAdapter(it, { userUrl: String -> itemClicked(userUrl) })
+            }
+        })
+    }
+    //executed when recyclerview item is clicked
+    private fun itemClicked(userName: String) {
+        //todo: onclick behavior
     }
 }

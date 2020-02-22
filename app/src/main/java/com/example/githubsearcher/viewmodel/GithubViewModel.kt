@@ -29,9 +29,9 @@ class GithubViewModel : ViewModel() {
         return githubUser
     }
 
-    private val githubRepos = MutableLiveData<PokoGithubReposList>()
+    private val githubRepos = MutableLiveData<List<PokoGithubReposList>>()
 
-    fun getGithubRepos(): LiveData<PokoGithubReposList> {
+    fun getGithubRepos(): LiveData<List<PokoGithubReposList>> {
         return githubRepos
     }
 
@@ -86,10 +86,10 @@ class GithubViewModel : ViewModel() {
 
         val network = Network(baseApiUrl)
         network.initRetrofit().getRepos(user)
-            .enqueue(object : Callback<PokoGithubReposList> {
+            .enqueue(object : Callback<List<PokoGithubReposList>> {
                 override fun onResponse(
-                    call: Call<PokoGithubReposList>,
-                    response: Response<PokoGithubReposList>
+                    call: Call<List<PokoGithubReposList>>,
+                    response: Response<List<PokoGithubReposList>>
                 ) {
                     println("success")
                     println("response info = " +response.body())
@@ -97,7 +97,7 @@ class GithubViewModel : ViewModel() {
 
                 }
 
-                override fun onFailure(call: Call<PokoGithubReposList>, t: Throwable) {
+                override fun onFailure(call: Call<List<PokoGithubReposList>>, t: Throwable) {
                     println("failure")
                     t.printStackTrace()
                 }

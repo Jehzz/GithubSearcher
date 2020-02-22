@@ -10,7 +10,7 @@ import com.example.githubsearcher.model.PokoGithubReposList
  * Adapter class for 2nd activity's repolist recyclerview
  * @author: Jess Osborn
  */
-class ReposListAdapter(val dataSet: PokoGithubReposList, val clickListener: (String) -> Unit) :
+class ReposListAdapter(val dataSet: List<PokoGithubReposList>, val clickListener: (String) -> Unit) :
     RecyclerView.Adapter<ReposListAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder =
@@ -27,7 +27,7 @@ class ReposListAdapter(val dataSet: PokoGithubReposList, val clickListener: (Str
      * Returns the number of items currently in the dataset
      * @author: Jess Osborn
      */
-    override fun getItemCount(): Int = dataSet.reposList.size
+    override fun getItemCount(): Int = dataSet.size
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.onBind(dataSet, position, clickListener)
@@ -40,9 +40,13 @@ class ReposListAdapter(val dataSet: PokoGithubReposList, val clickListener: (Str
      */
     class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvRepoName: TextView = itemView.findViewById(R.id.tv_repo_name)
+        var tvForks: TextView = itemView.findViewById(R.id.tv_forks)
+        var tvStars: TextView = itemView.findViewById(R.id.tv_stars)
 
-        fun onBind(data: PokoGithubReposList, position: Int, clickListener: (String) -> Unit) {
-            tvRepoName.text = data.reposList[position].toString()
+        fun onBind(data: List<PokoGithubReposList>, position: Int, clickListener: (String) -> Unit) {
+            tvRepoName.text = data[position].name.toString()
+            //tvForks.text = data[position]
+
         }
     }
 }
