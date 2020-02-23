@@ -32,8 +32,9 @@ class MainActivity : AppCompatActivity() {
 
         //set listener on edit text
         et_username_search.addTextChangedListener(object: TextWatcher {
+            var timer = Timer()
             override fun afterTextChanged(s: Editable?) {
-                var timer = Timer()
+                timer = Timer()
                 timer.schedule(object : TimerTask() {
                     override fun run() {
                         githubViewModel.getGithubSearchResults(s.toString())
@@ -42,7 +43,11 @@ class MainActivity : AppCompatActivity() {
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { //not used
             }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { //not used
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //if timer already exists, cancel and wait for user to finish typing
+                if (timer != null)
+                    timer.cancel()
             }
         })
 
