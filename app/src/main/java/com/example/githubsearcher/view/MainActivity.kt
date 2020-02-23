@@ -9,19 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.githubsearcher.R
 import com.example.githubsearcher.model.PokoGithubSearchResults
 import com.example.githubsearcher.viewmodel.GithubViewModel
 import com.example.weatherapp.view.SearchListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.Thread.sleep
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(com.example.githubsearcher.R.layout.activity_main)
 
         //Declare and instantiate the viewmodel
         val githubViewModel = ViewModelProvider(this, object : ViewModelProvider.Factory {
@@ -33,8 +33,12 @@ class MainActivity : AppCompatActivity() {
         //set listener on edit text
         et_username_search.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                sleep(100)
-                githubViewModel.getGithubSearchResults(s.toString())
+                var timer = Timer()
+                timer.schedule(object : TimerTask() {
+                    override fun run() {
+                        githubViewModel.getGithubSearchResults(s.toString())
+                    }
+                }, 600) // 600ms delay before the timer executes the „run“ method from TimerTask
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { //not used
             }
