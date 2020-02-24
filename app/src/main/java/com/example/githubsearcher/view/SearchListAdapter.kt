@@ -47,9 +47,11 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener:
         var tvName: TextView = itemView.findViewById(R.id.tv_user_name)
         var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_profile_avatar)
         var userName: String = ""
+        var tvReposCount: TextView = itemView.findViewById(R.id.tv_repo_count)
 
         fun onBind(data: PokoGithubSearchResults, position: Int, clickListener: (String) -> Unit) {
             tvName.text = data.items[position].login
+            tvReposCount.text = "Repos ## : NOT FOUND" //TODO: how to get this data without creating an API call for each match?
             Picasso.get().load(data.items[position].avatar_url).resize(100, 100).into(ivUserAvatar)
             userName = data.items[position].login
             itemView.setOnClickListener { clickListener(userName)}
