@@ -49,7 +49,6 @@ class GithubViewModel : ViewModel() {
                     println("success")
                     searchResults.value = response.body()
                 }
-
                 override fun onFailure(call: Call<PokoGithubSearchResults>, t: Throwable) {
                     println("failure")
                     t.printStackTrace()
@@ -73,15 +72,14 @@ class GithubViewModel : ViewModel() {
                     println("Dataset info = " +getGithubUser().toString())
 
                 }
-
                 override fun onFailure(call: Call<PokoGithubUser>, t: Throwable) {
                     println("failure")
                     t.printStackTrace()
                 }
             })
     }
-    //todo: getReposList
-    //Get user info from retrofit
+
+    //Get user's repo list from retrofit
     fun getUserRepos(user: String) {
 
         val network = Network(baseApiUrl)
@@ -96,7 +94,6 @@ class GithubViewModel : ViewModel() {
                     githubRepos.value = response?.body()
 
                 }
-
                 override fun onFailure(call: Call<List<PokoGithubReposList>>, t: Throwable) {
                     println("failure")
                     t.printStackTrace()

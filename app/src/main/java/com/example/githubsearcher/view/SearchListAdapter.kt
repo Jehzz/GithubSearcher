@@ -12,7 +12,7 @@ import com.example.githubsearcher.model.PokoGithubSearchResults
 import com.squareup.picasso.Picasso
 
 /**
- * Adapter class for mainactivity's search results recyclerview
+ * Adapter class for UserViewActivity's repository recyclerview
  * @author: Jess Osborn
  */
 class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener: (String) -> Unit) :
@@ -40,16 +40,18 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener:
 
 
     /**
-     * Binds data from the dataset to search_item_layout views.
+     * Binds data from the dataset to repos_item_view layout's views.
      * @author: Jess Osborn
      */
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         var tvName: TextView = itemView.findViewById(R.id.tv_user_name)
         var ivUserAvatar: ImageView = itemView.findViewById(R.id.iv_profile_avatar)
         var userName: String = ""
+        var tvReposCount: TextView = itemView.findViewById(R.id.tv_repo_count)
 
         fun onBind(data: PokoGithubSearchResults, position: Int, clickListener: (String) -> Unit) {
             tvName.text = data.items[position].login
+            tvReposCount.text = "Repos ## : NOT FOUND" //TODO: how to get this data without creating an API call for each match?
             Picasso.get().load(data.items[position].avatar_url).resize(100, 100).into(ivUserAvatar)
             userName = data.items[position].login
             itemView.setOnClickListener { clickListener(userName)}
