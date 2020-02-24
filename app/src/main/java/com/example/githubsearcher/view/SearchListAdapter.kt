@@ -12,7 +12,7 @@ import com.example.githubsearcher.model.PokoGithubSearchResults
 import com.squareup.picasso.Picasso
 
 /**
- * Adapter class for mainactivity's search results recyclerview
+ * Adapter class for UserViewActivity's repository recyclerview
  * @author: Jess Osborn
  */
 class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener: (String) -> Unit) :
@@ -40,7 +40,7 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener:
 
 
     /**
-     * Binds data from the dataset to search_item_layout views.
+     * Binds data from the dataset to repos_item_view layout's views.
      * @author: Jess Osborn
      */
     class CustomViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {

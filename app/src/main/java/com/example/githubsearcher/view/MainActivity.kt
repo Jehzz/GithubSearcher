@@ -15,7 +15,12 @@ import com.example.weatherapp.view.SearchListAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-
+/**
+ * This class lets the user search for Github users, triggering the viewmodel to find matches and
+ * populates the recyclerview with the results. The user can tap on a result to launch the 2nd
+ * activity and see more information
+ * @author: Jess Osborn
+ */
 class MainActivity : AppCompatActivity() {
 
 
@@ -64,12 +69,14 @@ class MainActivity : AppCompatActivity() {
             )
     }
 
-    //executed when recyclerview item is clicked. returns a user's login field, launches next activity
+    /**
+     * Executed when recyclerview item is clicked. returns a user's login field, launches next activity
+     * @author: Jess Osborn
+     */
     private fun itemClicked(userName: String) {
         val intent = Intent(this, UserViewActivity::class.java).apply{
             putExtra("user", userName)
         }
         startActivity(intent)
     }
-
 }
