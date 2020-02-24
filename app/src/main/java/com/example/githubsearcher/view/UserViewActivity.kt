@@ -42,7 +42,7 @@ class UserViewActivity : AppCompatActivity() {
                 tv_username.text = it.login?.toString()
                 tv_email.text = "Email: " +it.email?.toString()
                 tv_location.text = "Location: " +it.location?.toString()
-                tv_join_date.text = "Joined: " +it.created_at?.toString()
+                tv_join_date.text = "Joined: " + it.created_at?.toString().substring(0, 10)
                 tv_follower_count.text = "Followers: " +it.followers?.toString()
                 tv_following_count.text = "Following: " +it.following?.toString()
                 Picasso.get().load(it.avatar_url?.toString()).resize(100, 100).into(iv_user_avatar)
