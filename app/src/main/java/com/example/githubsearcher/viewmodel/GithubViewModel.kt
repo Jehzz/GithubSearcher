@@ -48,6 +48,8 @@ class GithubViewModel : ViewModel() {
                 ) {
                     println("success")
                     searchResults.value = response.body()
+                    // call getUserInfo() here with retrieved user url's
+                    // save to database
                 }
                 override fun onFailure(call: Call<PokoGithubSearchResults>, t: Throwable) {
                     println("failure")

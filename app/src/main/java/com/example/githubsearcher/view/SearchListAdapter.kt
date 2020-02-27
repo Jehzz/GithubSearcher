@@ -32,7 +32,7 @@ class SearchListAdapter(val dataSet: PokoGithubSearchResults, val clickListener:
      * Returns the number of items currently in the dataset
      * @author: Jess Osborn
      */
-    override fun getItemCount(): Int = dataSet.total_count
+    override fun getItemCount(): Int = dataSet.items.size
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.onBind(dataSet, position, clickListener)
